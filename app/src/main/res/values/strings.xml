@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AppGit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_data_available">Data not Available</string>
+    <string name="username">username</string>
+    <string name="detail">detail</string>
+    <string name="avatar">avatar</string>
+    <string name="bio">bio</string>
+    <string name="followers">followers</string>
+    <string name="following">Following</string>
+</resources>
