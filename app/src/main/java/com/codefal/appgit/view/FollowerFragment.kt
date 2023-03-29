@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codefal.appgit.databinding.FragmentFollowerBinding
-import com.codefal.appgit.model.ResponseFollowItem
-import com.codefal.appgit.view.adapter.AdapterFollower
+import com.codefal.appgit.model.ItemsUsers
+import com.codefal.appgit.view.adapter.AdapterList
 import com.codefal.appgit.view_model.ViewModelApp
 
 
@@ -24,7 +24,7 @@ class FollowerFragment : Fragment() {
     private var _binding : FragmentFollowerBinding? = null
     private val binding get() = _binding!!
     private lateinit var modelApp: ViewModelApp
-    private lateinit var adapterFol: AdapterFollower
+    private lateinit var adapterFol: AdapterList
     private lateinit var shared : SharedPreferences
 
     override fun onCreateView(
@@ -43,7 +43,7 @@ class FollowerFragment : Fragment() {
         val username = shared.getString("username", "")
         Log.e(ContentValues.TAG, "get username Followers: $username")
 
-        adapterFol = AdapterFollower(ArrayList())
+        adapterFol = AdapterList(ArrayList())
         setRV()
         if (username != null) {
             setData(username)
@@ -59,8 +59,8 @@ class FollowerFragment : Fragment() {
         modelApp.getFollowers(username)
         modelApp.liveFollowers.observe(viewLifecycleOwner){
             if (it != null){
-                adapterFol.setData(it as ArrayList<ResponseFollowItem>)
-                adapterFol = AdapterFollower(it)
+                adapterFol.setData(it as ArrayList<ItemsUsers>)
+                adapterFol = AdapterList(it)
                 setRV()
                 adapterFol.notifyDataSetChanged()
             }

@@ -5,7 +5,20 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ResponseFollowItem(
+data class ResponseSearch(
+
+	@field:SerializedName("total_count")
+	val totalCount: Int? = null,
+
+	@field:SerializedName("incomplete_results")
+	val incompleteResults: Boolean? = null,
+
+	@field:SerializedName("items")
+	val items: ArrayList<ItemsUsers>? = null
+) : Parcelable
+
+@Parcelize
+data class ItemsUsers(
 
 	@field:SerializedName("gists_url")
 	val gistsUrl: String? = null,
@@ -33,6 +46,9 @@ data class ResponseFollowItem(
 
 	@field:SerializedName("subscriptions_url")
 	val subscriptionsUrl: String? = null,
+
+	@field:SerializedName("score")
+	val score: Double? = null,
 
 	@field:SerializedName("received_events_url")
 	val receivedEventsUrl: String? = null,

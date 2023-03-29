@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.codefal.appgit.databinding.FragmentUserBinding
-import com.codefal.appgit.model.ItemsSearch
+import com.codefal.appgit.model.ItemsUsers
 import com.codefal.appgit.view.adapter.AdapterSectionPager
 import com.codefal.appgit.view_model.ViewModelApp
 import com.google.android.material.tabs.TabLayoutMediator
@@ -37,7 +37,7 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val get = arguments?.getParcelable("detail_user") as ItemsSearch?
+        val get = arguments?.getParcelable("detail_user") as ItemsUsers?
         val username = get?.login.toString()
         Log.e(TAG, "onViewCreated: get parceable $username")
 

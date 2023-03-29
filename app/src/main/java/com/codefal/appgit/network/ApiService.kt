@@ -1,6 +1,6 @@
 package com.codefal.appgit.network
 
-import com.codefal.appgit.model.ResponseFollowItem
+import com.codefal.appgit.model.ItemsUsers
 import com.codefal.appgit.model.ResponseSearch
 import com.codefal.appgit.model.ResponseUsers
 import retrofit2.Call
@@ -23,10 +23,10 @@ interface ApiService {
     @GET("users/{username}/followers")
     fun followers (
         @Path("username") username: String
-    ) : Call<List<ResponseFollowItem>>
+    ) : Call<List<ItemsUsers>>
 
     @GET("users/{username}/following")
     fun following (
         @Path("username") username: String
-    ) : Call<List<ResponseFollowItem>>
+    ) : Call<List<ItemsUsers>>
 }

@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codefal.appgit.R
 import com.codefal.appgit.databinding.ItemListBinding
-import com.codefal.appgit.model.ItemsSearch
+import com.codefal.appgit.model.ItemsUsers
 
-class AdapterHome(private var itemUser : List<ItemsSearch>): RecyclerView.Adapter<AdapterHome.HomeViewHolder>() {
+class AdapterList(private var itemUser : List<ItemsUsers>): RecyclerView.Adapter<AdapterList.HomeViewHolder>() {
     class HomeViewHolder(val binding : ItemListBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
@@ -28,7 +28,7 @@ class AdapterHome(private var itemUser : List<ItemsSearch>): RecyclerView.Adapte
             Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_userFragment, data)
         }
     }
-    fun setData(data: ArrayList<ItemsSearch>){
+    fun setData(data: ArrayList<ItemsUsers>){
         this.itemUser = data
     }
 }

@@ -1,5 +1,6 @@
 package com.codefal.appgit.network
 
+import com.codefal.appgit.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -7,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
     private const val BASE_URL = "https://api.github.com/"
-    private const val TOKEN = "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"
+    private val TOKEN = BuildConfig.KEY
 
     private val authInterceptor = Interceptor { chain ->
         val req = chain.request()

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -10,6 +11,7 @@ android {
     compileSdk 33
 
     defaultConfig {
+        buildConfigField ("String", "KEY", '"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"')
         applicationId "com.codefal.appgit"
         minSdk 29
         targetSdk 33
@@ -39,7 +41,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -56,4 +58,6 @@ dependencies {
     kapt "android.arch.lifecycle:compiler:1.1.1"
     kapt 'com.github.bumptech.glide:glide:4.13.1'
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 }

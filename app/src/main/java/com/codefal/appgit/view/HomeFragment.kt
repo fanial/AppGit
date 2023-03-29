@@ -12,15 +12,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codefal.appgit.databinding.FragmentHomeBinding
-import com.codefal.appgit.model.ItemsSearch
-import com.codefal.appgit.view.adapter.AdapterHome
+import com.codefal.appgit.model.ItemsUsers
+import com.codefal.appgit.view.adapter.AdapterList
 import com.codefal.appgit.view_model.ViewModelApp
 
 class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var model: ViewModelApp
-    private lateinit var adapterHome: AdapterHome
+    private lateinit var adapterList: AdapterList
     private lateinit var username : String
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapterHome = AdapterHome(ArrayList())
+        adapterList = AdapterList(ArrayList())
         setRV()
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -61,17 +61,17 @@ class HomeFragment : Fragment() {
         }
         model.liveSearch().observe(viewLifecycleOwner){
             if (it != null) {
-                adapterHome.setData(it as ArrayList<ItemsSearch>)
-                adapterHome = AdapterHome(it)
+                adapterList.setData(it as ArrayList<ItemsUsers>)
+                adapterList = AdapterList(it)
                 setRV()
-                adapterHome.notifyDataSetChanged()
+                adapterList.notifyDataSetChanged()
                 Log.i(TAG, "Response setData: $it")
             }
         }
     }
 
     private fun setRV() {
-        binding.rvHome.adapter = adapterHome
+        binding.rvHome.adapter = adapterList
         val layoutManager = LinearLayoutManager(context)
         binding.rvHome.layoutManager = layoutManager
     }
