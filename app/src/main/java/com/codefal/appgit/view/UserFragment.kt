@@ -18,7 +18,9 @@ import com.codefal.appgit.model.ItemsUsers
 import com.codefal.appgit.view.adapter.AdapterSectionPager
 import com.codefal.appgit.view_model.ViewModelApp
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserFragment : Fragment() {
     private var _binding : FragmentUserBinding? = null
     private val binding get() = _binding!!
@@ -39,7 +41,7 @@ class UserFragment : Fragment() {
 
         val get = arguments?.getParcelable("detail_user") as ItemsUsers?
         val username = get?.login.toString()
-        Log.e(TAG, "onViewCreated: get parceable $username")
+        Log.i(TAG, "onViewCreated: get parceable $username")
 
         shared = requireActivity().getSharedPreferences("username", Context.MODE_PRIVATE)!!
         val editor = shared.edit()
@@ -56,18 +58,20 @@ class UserFragment : Fragment() {
     }
 
     private fun setViewPager() {
+        val tabLayout = binding.tabLayout
+        val viewPager = binding.viewPager
         val sectionPagerAdapter = AdapterSectionPager(childFragmentManager, lifecycle)
-        binding.viewPager.adapter = sectionPagerAdapter
+        viewPager.adapter = sectionPagerAdapter
+
         modelApp.liveUser.observe(viewLifecycleOwner){
             if (it != null){
-                TabLayoutMediator(binding.tabLayout, binding.viewPager){ tab, position ->
+                TabLayoutMediator(tabLayout, viewPager){ tab, position ->
                     when(position){
                         0 -> {
-                            tab.text = "Following : ${it.following}"
-
+                            tab.text = "${it.followers} Followers"
                         }
                         1 -> {
-                            tab.text = "Followers : ${it.followers}"
+                            tab.text = "${it.following} Following"
                         }
                     }
                 }.attach()

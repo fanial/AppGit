@@ -7,7 +7,9 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.codefal.appgit.MainActivity
 import com.codefal.appgit.databinding.ActivitySplashScreenBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
     private var _binding : ActivitySplashScreenBinding? = null
     private val binding get() = _binding!!

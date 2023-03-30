@@ -1,6 +1,5 @@
 package com.codefal.appgit.view
 
-import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -15,12 +14,14 @@ import com.codefal.appgit.databinding.FragmentHomeBinding
 import com.codefal.appgit.model.ItemsUsers
 import com.codefal.appgit.view.adapter.AdapterList
 import com.codefal.appgit.view_model.ViewModelApp
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var model: ViewModelApp
-    private lateinit var adapterList: AdapterList
+    private val adapterList by lazy { AdapterList() }
     private lateinit var username : String
 
     override fun onCreateView(
@@ -35,7 +36,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapterList = AdapterList(ArrayList())
         setRV()
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -54,17 +54,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun setData(username: String?) {
         if (username != null) {
             model.getSearch(username)
         }
         model.liveSearch().observe(viewLifecycleOwner){
             if (it != null) {
-                adapterList.setData(it as ArrayList<ItemsUsers>)
-                adapterList = AdapterList(it)
+                adapterList.setData(it as MutableList<ItemsUsers>)
                 setRV()
-                adapterList.notifyDataSetChanged()
                 Log.i(TAG, "Response setData: $it")
             }
         }

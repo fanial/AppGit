@@ -14,17 +14,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.codefal.appgit.databinding.FragmentFollowingBinding
+import com.codefal.appgit.databinding.FragmentFollowBinding
 import com.codefal.appgit.model.ItemsUsers
 import com.codefal.appgit.view.adapter.AdapterList
 import com.codefal.appgit.view_model.ViewModelApp
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class FollowingFragment : Fragment() {
-    private var _binding : FragmentFollowingBinding? = null
+@AndroidEntryPoint
+class FollowFragment() : Fragment() {
+    private var _binding : FragmentFollowBinding? = null
     private val binding get() = _binding!!
     private lateinit var modelApp: ViewModelApp
-    private lateinit var adapterFol: AdapterList
+    private val adapterFol by lazy { AdapterList() }
     private lateinit var shared : SharedPreferences
 
     override fun onCreateView(
@@ -32,7 +33,7 @@ class FollowingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         modelApp = ViewModelProvider(this)[ViewModelApp::class.java]
-        _binding = FragmentFollowingBinding.inflate(layoutInflater)
+        _binding = FragmentFollowBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -41,26 +42,45 @@ class FollowingFragment : Fragment() {
 
         shared = requireActivity().getSharedPreferences("username", Context.MODE_PRIVATE)!!
         val username = shared.getString("username", "")
-        Log.e(TAG, "get username Following: $username")
+        Log.i(TAG, "onViewCreated: $username")
 
-        adapterFol = AdapterList(ArrayList())
-        setRV()
-        if (username != null) {
-            setData(username)
+        val page = arguments?.getInt(ARGS_KEY, 0)
+        Log.i(TAG, "onViewCreated: $page")
+
+        if (username != null){
+            when (page){
+                1 -> page1(username)
+                2 -> page2(username)
+            }
         }
+
+        setRV()
+
 
         modelApp.isLoading.observe(viewLifecycleOwner){
             loading(it)
         }
     }
 
+
     @SuppressLint("NotifyDataSetChanged")
-    private fun setData(username: String) {
+    private fun page1(username: String) {
+        modelApp.getFollowers(username)
+        modelApp.liveFollowers.observe(viewLifecycleOwner){
+            if (it != null){
+                adapterFol.setData(it as MutableList<ItemsUsers>)
+                setRV()
+                adapterFol.notifyDataSetChanged()
+            }
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun page2(username: String) {
         modelApp.getFollowing(username)
         modelApp.liveFollowing.observe(viewLifecycleOwner){
             if (it != null){
-                adapterFol.setData(it as ArrayList<ItemsUsers>)
-                adapterFol = AdapterList(it)
+                adapterFol.setData(it as MutableList<ItemsUsers>)
                 setRV()
                 adapterFol.notifyDataSetChanged()
             }
@@ -86,5 +106,9 @@ class FollowingFragment : Fragment() {
                 binding.rvFollowing.visibility = View.VISIBLE
             }
         }
+    }
+
+    companion object {
+        const val ARGS_KEY = "position"
     }
 }

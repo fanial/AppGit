@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/followerFragment"
-        android:name="com.codefal.appgit.view.FollowerFragment"
+        android:name="com.codefal.appgit.view.FollowFragment"
         android:label="fragment_follower"
-        tools:layout="@layout/fragment_follower" >
+        tools:layout="@layout/fragment_follow" >
         <action
             android:id="@+id/action_followerFragment_to_userFragment"
             app:destination="@id/userFragment" />
