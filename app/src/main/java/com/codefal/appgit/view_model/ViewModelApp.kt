@@ -9,6 +9,7 @@ import com.codefal.appgit.model.ItemsUsers
 import com.codefal.appgit.model.ResponseSearch
 import com.codefal.appgit.model.ResponseUsers
 import com.codefal.appgit.network.ApiService
+import com.codefal.appgit.repository.RoomRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,7 +17,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelApp @Inject constructor(private val apiService: ApiService) :ViewModel() {
+class ViewModelApp @Inject constructor(private val apiService: ApiService, private val mRoomRepo: RoomRepo) :ViewModel() {
+
     private val _search = MutableLiveData<List<ItemsUsers>?>()
     fun liveSearch() : MutableLiveData<List<ItemsUsers>?> = _search
 
@@ -34,6 +36,8 @@ class ViewModelApp @Inject constructor(private val apiService: ApiService) :View
 
     private val _message = MutableLiveData<String>()
     val isMessege : LiveData<String> = _message
+
+    fun getAllFavorite(): LiveData<List<ItemsUsers>> = mRoomRepo.getAllFav()
 
     fun getSearch(username : String){
         _loading.value = true

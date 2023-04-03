@@ -3,10 +3,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_data_available">Data not Available</string>
-    <string name="username">username</string>
-    <string name="detail">detail</string>
-    <string name="avatar">avatar</string>
-    <string name="bio">bio</string>
-    <string name="followers">followers</string>
+    <string name="username">Username</string>
+    <string name="detail">Detail</string>
+    <string name="avatar">Avatar</string>
+    <string name="bio">Bio</string>
+    <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="favorite">Favorite</string>
+    <string name="theme">Theme</string>
+    <string name="detail_user">Detail User</string>
+    <string name="success">Success</string>
+    <string name="home">Home</string>
 </resources>
