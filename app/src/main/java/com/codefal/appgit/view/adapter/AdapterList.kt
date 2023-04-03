@@ -1,20 +1,17 @@
 package com.codefal.appgit.view.adapter
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.codefal.appgit.R
 import com.codefal.appgit.databinding.ItemListBinding
 import com.codefal.appgit.model.ItemsUsers
 
 class AdapterList: RecyclerView.Adapter<AdapterList.HomeViewHolder>() {
 
-
+    var onClick: ((ItemsUsers) -> Unit)? = null
     private val differCallback = object : DiffUtil.ItemCallback<ItemsUsers>(){
         override fun areItemsTheSame(oldItem: ItemsUsers, newItem: ItemsUsers): Boolean {
             return oldItem.id == newItem.id
@@ -42,12 +39,11 @@ class AdapterList: RecyclerView.Adapter<AdapterList.HomeViewHolder>() {
     override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.setItem(differ.currentList[position])
+        val item = differ.currentList[position]
+        holder.setItem(item)
         holder.setIsRecyclable(false)
         holder.binding.cardList.setOnClickListener {
-            val data = Bundle()
-            data.putParcelable("detail_user", differ.currentList[position])
-            Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_userFragment, data)
+            onClick?.invoke(item)
         }
     }
     fun setData(data: MutableList<ItemsUsers>) = differ.submitList(data)

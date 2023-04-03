@@ -6,24 +6,6 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/followerFragment"
-        android:name="com.codefal.appgit.view.FollowFragment"
-        android:label="fragment_follower"
-        tools:layout="@layout/fragment_follow" >
-        <action
-            android:id="@+id/action_followerFragment_to_userFragment"
-            app:destination="@id/userFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/followingFragment"
-        android:name="com.codefal.appgit.view.FollowingFragment"
-        android:label="fragment_following"
-        tools:layout="@layout/fragment_following" >
-        <action
-            android:id="@+id/action_followingFragment_to_userFragment"
-            app:destination="@id/userFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/homeFragment"
         android:name="com.codefal.appgit.view.HomeFragment"
         android:label="fragment_home"
@@ -36,12 +18,23 @@
         android:id="@+id/userFragment"
         android:name="com.codefal.appgit.view.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" >
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/followFragment"
+        android:name="com.codefal.appgit.view.FollowFragment"
+        android:label="fragment_follow"
+        tools:layout="@layout/fragment_follow" >
         <action
-            android:id="@+id/action_userFragment_to_followerFragment"
-            app:destination="@id/followerFragment" />
+            android:id="@+id/action_followFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.codefal.appgit.view.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
         <action
-            android:id="@+id/action_userFragment_to_followingFragment"
-            app:destination="@id/followingFragment" />
+            android:id="@+id/action_favoriteFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
 </navigation>

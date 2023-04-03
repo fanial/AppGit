@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.codefal.appgit.R
 import com.codefal.appgit.databinding.FragmentHomeBinding
 import com.codefal.appgit.model.ItemsUsers
 import com.codefal.appgit.view.adapter.AdapterList
@@ -35,6 +38,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.title = getString(R.string.home)
 
         setRV()
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
@@ -71,6 +77,11 @@ class HomeFragment : Fragment() {
         binding.rvHome.adapter = adapterList
         val layoutManager = LinearLayoutManager(context)
         binding.rvHome.layoutManager = layoutManager
+        adapterList.onClick = {
+            val bundle = Bundle()
+            bundle.putParcelable("detail_user", it)
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_userFragment, bundle)
+        }
     }
 
     private fun loading(status: Boolean) {

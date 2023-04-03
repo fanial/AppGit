@@ -1,5 +1,6 @@
 package com.codefal.appgit.network
 
+
 import com.codefal.appgit.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -15,7 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiConfig {
     private const val BASE_URL = "https://api.github.com/"
-    private val TOKEN = BuildConfig.KEY
+    private const val TOKEN = BuildConfig.KEY
 
     private val authInterceptor = Interceptor { chain ->
         val req = chain.request()

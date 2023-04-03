@@ -2,7 +2,6 @@
 
 package com.codefal.appgit.view
 
-import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
@@ -62,27 +61,22 @@ class FollowFragment() : Fragment() {
         }
     }
 
-
-    @SuppressLint("NotifyDataSetChanged")
     private fun page1(username: String) {
         modelApp.getFollowers(username)
         modelApp.liveFollowers.observe(viewLifecycleOwner){
             if (it != null){
                 adapterFol.setData(it as MutableList<ItemsUsers>)
                 setRV()
-                adapterFol.notifyDataSetChanged()
             }
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun page2(username: String) {
         modelApp.getFollowing(username)
         modelApp.liveFollowing.observe(viewLifecycleOwner){
             if (it != null){
                 adapterFol.setData(it as MutableList<ItemsUsers>)
                 setRV()
-                adapterFol.notifyDataSetChanged()
             }
         }
     }
