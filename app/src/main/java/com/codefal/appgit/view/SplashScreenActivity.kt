@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
+
     private var _binding : ActivitySplashScreenBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {

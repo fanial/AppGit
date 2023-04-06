@@ -13,12 +13,25 @@
         <action
             android:id="@+id/action_homeFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/userFragment"
         android:name="com.codefal.appgit.view.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/followFragment"
         android:name="com.codefal.appgit.view.FollowFragment"
@@ -36,5 +49,13 @@
         <action
             android:id="@+id/action_favoriteFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.codefal.appgit.view.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

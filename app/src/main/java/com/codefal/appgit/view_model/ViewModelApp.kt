@@ -17,7 +17,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelApp @Inject constructor(private val apiService: ApiService, private val mRoomRepo: RoomRepo) :ViewModel() {
+class ViewModelApp @Inject constructor(val apiService: ApiService, private val mRoomRepo: RoomRepo) :ViewModel() {
 
     private val _search = MutableLiveData<List<ItemsUsers>?>()
     fun liveSearch() : MutableLiveData<List<ItemsUsers>?> = _search
@@ -38,6 +38,8 @@ class ViewModelApp @Inject constructor(private val apiService: ApiService, priva
     val isMessege : LiveData<String> = _message
 
     fun getAllFavorite(): LiveData<List<ItemsUsers>> = mRoomRepo.getAllFav()
+
+    fun getByUser(username: String): LiveData<ResponseUsers> = mRoomRepo.getFavByUser(username)
 
     fun getSearch(username : String){
         _loading.value = true

@@ -12,11 +12,6 @@ class ViewModelRoom @Inject constructor(private val mRoomRepo: RoomRepo): ViewMo
     fun insert(favorite : RoomEntity){
         mRoomRepo.insert(favorite)
     }
-
-    fun update(favorite : RoomEntity){
-        mRoomRepo.update(favorite)
-    }
-
     fun delete(favorite : RoomEntity){
         mRoomRepo.delete(favorite)
     }

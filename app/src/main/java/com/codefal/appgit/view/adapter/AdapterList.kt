@@ -12,6 +12,7 @@ import com.codefal.appgit.model.ItemsUsers
 class AdapterList: RecyclerView.Adapter<AdapterList.HomeViewHolder>() {
 
     var onClick: ((ItemsUsers) -> Unit)? = null
+
     private val differCallback = object : DiffUtil.ItemCallback<ItemsUsers>(){
         override fun areItemsTheSame(oldItem: ItemsUsers, newItem: ItemsUsers): Boolean {
             return oldItem.id == newItem.id

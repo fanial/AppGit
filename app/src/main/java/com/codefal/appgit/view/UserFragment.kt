@@ -67,18 +67,34 @@ class UserFragment : Fragment() {
         getData()
         setViewPager()
 
-        binding.favorite.setOnClickListener {
-            GlobalScope.launch {
-                val insertData = RoomEntity(username, avatar)
-                modelRoom.insert(insertData)
-            }
-            activity?.runOnUiThread {
-                Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
-            }
-        }
-
         modelApp.isLoading.observe(viewLifecycleOwner){
             loading(it)
+        }
+
+        modelApp.getByUser(username).observe(viewLifecycleOwner){
+            if (it != null){
+                binding.favorite.setImageResource(R.drawable.baseline_favorite_24)
+                binding.favorite.setOnClickListener {
+                    GlobalScope.launch {
+                        val deleteData = RoomEntity(username, avatar)
+                        modelRoom.delete(deleteData)
+                    }
+                    activity?.runOnUiThread {
+                        Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } else{
+                binding.favorite.setImageResource(R.drawable.baseline_favorite_border_24)
+                binding.favorite.setOnClickListener {
+                    GlobalScope.launch {
+                        val insertData = RoomEntity(username, avatar)
+                        modelRoom.insert(insertData)
+                    }
+                    activity?.runOnUiThread {
+                        Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 

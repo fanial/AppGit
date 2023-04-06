@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codefal.appgit.R
 import com.codefal.appgit.databinding.FragmentFavoriteBinding
@@ -46,10 +46,12 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setData() {
+        loading(true)
         modelApp.getAllFavorite().observe(viewLifecycleOwner){
             if (it != null){
                 adapterList.setData(it as MutableList<ItemsUsers>)
                 setRV()
+                loading(false)
             }
         }
     }
@@ -61,7 +63,7 @@ class FavoriteFragment : Fragment() {
         adapterList.onClick = {
             val bundle = Bundle()
             bundle.putParcelable("detail_user", it)
-            Navigation.findNavController(requireView()).navigate(R.id.action_favoriteFragment_to_userFragment, bundle)
+            findNavController().navigate(R.id.action_favoriteFragment_to_userFragment, bundle)
         }
     }
 

@@ -10,7 +10,7 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codefal.appgit.R
 import com.codefal.appgit.databinding.FragmentHomeBinding
@@ -21,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var model: ViewModelApp
@@ -80,7 +81,7 @@ class HomeFragment : Fragment() {
         adapterList.onClick = {
             val bundle = Bundle()
             bundle.putParcelable("detail_user", it)
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_userFragment, bundle)
+            findNavController().navigate(R.id.action_homeFragment_to_userFragment, bundle)
         }
     }
 

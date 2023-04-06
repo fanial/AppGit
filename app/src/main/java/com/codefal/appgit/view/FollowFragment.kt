@@ -11,7 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codefal.appgit.databinding.FragmentFollowBinding
 import com.codefal.appgit.model.ItemsUsers
@@ -23,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FollowFragment() : Fragment() {
     private var _binding : FragmentFollowBinding? = null
     private val binding get() = _binding!!
-    private lateinit var modelApp: ViewModelApp
+    private val modelApp : ViewModelApp by viewModels()
     private val adapterFol by lazy { AdapterList() }
     private lateinit var shared : SharedPreferences
 
@@ -31,7 +31,6 @@ class FollowFragment() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        modelApp = ViewModelProvider(this)[ViewModelApp::class.java]
         _binding = FragmentFollowBinding.inflate(layoutInflater)
         return binding.root
     }
